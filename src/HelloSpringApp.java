@@ -5,8 +5,9 @@ public class HelloSpringApp
     public static void main(String[] args)
     {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        Coach theCoach = context.getBean("abc", Coach.class);
+//        Bean comes fully assembled with our fortune service dependency!
+        Coach theCoach = context.getBean("myCoach", Coach.class);
         System.out.println(theCoach.getDailyWorkout());
-        context.close();
+        System.out.println(theCoach.getDailyFortune());
     }
 }

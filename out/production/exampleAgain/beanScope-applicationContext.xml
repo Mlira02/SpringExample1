@@ -6,21 +6,16 @@
         http://www.springframework.org/schema/beans/spring-context.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-<!--    loads in the properties file to use in config file-->
-    <context:property-placeholder location="classpath:sport.properties" />
 <!--This is the baseball coach bean with construct argument being myFortune down below... -->
-    <bean id="myCoach" class="TrackCoach">
+    <bean id="myCoach"
+          class="TrackCoach"
+          init-method="beanStartup"
+          destroy-method="beanDestroyed"
+    >
         <constructor-arg ref="myFortune"></constructor-arg>
     </bean>
 <!--This bean is the myFortune bean down below...-->
     <bean id="myFortune" class="HappyFortuneService"></bean>
 
 
-    <bean id="myCricketCoach" class="CricketCoach">
-        <!--property here will call the setFortuneService in cricketCoach to use the fortune service-->
-        <property name="fortuneService" ref="myFortune"></property>
-        <!--literal values for CricketCoach below...-->
-        <property name="emailAddress" value="${foo.email}"></property>
-        <property name="teamName" value="${foo.team}"></property>
-    </bean>
 </beans>
